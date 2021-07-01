@@ -45,7 +45,7 @@ class data{
         ofstream out;
         string file = city + ".txt";
         out.open(file,std::ios::app);
-        out<<"\nName : "<<name<<"\nMobile no : "<<number<<"\nAddress : "<<address<<"\nCity : "<<city<<"\nProfession : "<<profession<<endl;
+        out<<"\nName : "<<name<<"\nMobile no : "<<number<<"\nProfession : "<<profession<<"\nCity : "<<city<<"\nAddress : "<<address<<endl;
         out.close();
 
     }
@@ -366,7 +366,7 @@ void start(){
     }
     else
     {
-        // user();
+        user();
     }
 
 }
@@ -390,9 +390,341 @@ int main(){
 }
 
 void user(){
-    string name;
-    cout<<"Name to search : ";
-    getline(cin,name);
+    string city,name,profession,number;
+
+    fflush(stdin);
+    cout<<"\n\nEnter the City : ";
+    getline(cin,city);
+
+    ifstream in;
+    string file = city.append(".txt");
+    in.open(file);
+ 
+    cout<<"\n\nEnter info you know : "<<endl;
+
+    int choice,flag=0 ;
+    string str;
+    string sname,snumber,sprofession; // To search by mobile and profession
+
+    cout<<"1.Name only\n2.Mobile No. only\n3.Profession only\n4.Name & Profession\n5.Name & Mobile No\n6.Profession & Mobile No\n7.Name,Mobile No,Profession"<<endl;
+
+    cin>>choice;
+
+    switch (choice)
+    {
+    case 1:    // Name Only
+
+        fflush(stdin);
+        cout<<"Enter the name : ";
+        getline(cin,name);
+
+        getline(in,str);
+        while (!in.eof())
+        {
+            if (str == "Name : " + name)
+            {
+                flag = 1 ;
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+            }
+            
+            getline(in,str);
+        }
+        if (flag == 0)
+        {
+            cout<<"Data is not found"<<endl;
+        }
+        
+        break;
+ 
+    case 2:   // Mobile No. only
+
+        cout<<"Enter Mobile No : ";
+        cin>>number ;
+
+        fflush(stdin);
+        getline(in,str);
+        
+
+        while (!in.eof())
+        {
+            if (str.substr(0,4) == "Name"){
+                sname = str ;
+            }
+    
+            if (str == "Mobile no : " + number)
+            {
+                flag = 1 ;
+                cout<<sname<<"\n";
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+                
+            }
+                
+               
+             getline(in,str);
+        }
+            
+            
+        if (flag == 0)
+        {
+            cout<<"Data is not found"<<endl;
+        }
+        
+        break;
+    case 3:              // Profession only
+
+        getline(in,str);
+
+        cout<<"Enter the profession : ";
+        fflush(stdin);
+        getline(cin,profession);
+        
+        while (!in.eof())
+        {
+            if (str.substr(0,4) == "Name")
+            {
+                sname = str ;
+            }
+
+            if (str.substr(0,6) == "Mobile")
+            {
+                snumber = str ;
+            }
+            
+            
+            if (str == "Profession : " + profession)
+            {
+                flag = 1 ;
+
+                cout<<sname<<endl;
+                cout<<snumber<<endl;
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+                getline(in,str);
+                cout<<str<<"\n";
+                
+            }
+            
+            getline(in,str);
+        }
+        if (flag == 0)
+        {
+            cout<<"Data is not found"<<endl;
+        }
+        
+        break;
+    
+    case 4:      // Name & Profession
+
+        cout<<"Enter the Name : ";
+        fflush(stdin);
+        getline(cin,name);
+
+        cout<<"Enter the Profession : ";
+        fflush(stdin);
+        getline(cin,profession);
+
+        getline(in,str);
+        
+        while (!in.eof())
+        {
+
+            if (str == "Name : " + name)
+            {
+                sname = str ;
+                getline(in,str);
+                snumber = str ;
+                getline(in,str);
+                if (str == "Profession : " + profession)
+                {
+                        flag = 1;
+
+                        cout<<sname<<endl;
+                        cout<<snumber<<endl; ;
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                }
+                
+            }
+            
+            getline(in,str);
+        }
+        if (flag == 0)
+        {
+            cout<<"Data is not found"<<endl;
+        }
+        
+        break;
+
+    case 5:       //  Name & Mobile No
+
+        cout<<"Enter the Name : ";
+        fflush(stdin);
+        getline(cin,name);
+
+        cout<<"Enter the Mobile No : ";
+        fflush(stdin);
+        getline(cin,number);
+
+        getline(in,str);
+        
+        while (!in.eof())
+        {
+
+            if (str == "Name : " + name)
+            {
+                cout<<"Check1"<<endl;
+                sname = str ;
+                getline(in,str);
+                fflush(stdin);
+                if (str == "Mobile no : " + number)
+                {
+                        cout<<"Check2"<<endl;
+                        flag = 1 ;
+                        cout<<sname<<endl;
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                }
+                
+            }
+            
+            getline(in,str);
+        }
+        if (flag == 0)
+        {
+            cout<<"Data is not found"<<endl;
+        }
+        
+        break;
+    
+    case 6:                // Profession & Mobile No
+
+        cout<<"Enter the Mobile No : ";
+        fflush(stdin);
+        getline(cin,number);
+
+        cout<<"Enter the Profession : ";
+        fflush(stdin);
+        getline(cin,profession);
+        
+
+        getline(in,str);
+        
+        while (!in.eof())
+        {
+
+            if (str == "Mobile no : " + number)
+            {
+                snumber = str ;
+
+                getline(in,str);
+
+                if (str == "Profession : " + profession)
+                {
+                        flag = 1;
+                        cout<<sname<<endl;
+                        cout<<snumber<<endl;
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                }
+                
+            }
+
+            sname = str ;
+            
+            getline(in,str);
+        }
+        if (flag == 0)
+        {
+            cout<<"Data is not found"<<endl;
+        }
+        
+        break;
+    case 7:      // All 
+
+        getline(in,str);
+
+        cout<<"Enter the name : ";
+        fflush(stdin);
+        getline(cin,name);
+
+        cout<<"Enter the Mobile No : ";
+        fflush(stdin);
+        getline(cin,number);
+
+        cout<<"Enter the Profession : ";
+        fflush(stdin);
+        getline(cin,profession);
+
+        while (!in.eof())
+        {
+            if (str == "Name : " + name)
+            {
+                sname = str ;
+                getline(in,str);
+
+                if (str == "Mobile no : " + number)
+                {
+                    snumber = str ;
+                    getline(in,str);
+
+                    if (str == "Profession : " + profession)
+                    {
+                        flag = 1;
+                        cout<<sname<<endl;
+                        cout<<snumber<<endl;
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                        getline(in,str);
+                        cout<<str<<"\n";
+                    }
+                    
+                }
+                
+            }
+            
+            getline(in,str);
+        }
+        if (flag == 0)
+        {
+            cout<<"Data is not found"<<endl;
+        }
+        
+        break;
+    
+    default:
+        cout<<"Enter the correct option !!! ";
+        user();
+        break;
+    }
+    
+    
 
     
 }
