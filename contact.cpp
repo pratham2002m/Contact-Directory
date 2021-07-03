@@ -1,10 +1,10 @@
 
 // Libraries Used :
-#include<bits/stdc++.h> 
 #include<iostream>
 #include<windows.h>
 #include<fstream>
 #include<string>
+
 
 using namespace std;
 
@@ -22,7 +22,7 @@ void storedata();
 class data ;
 
 
-class data{
+class data1{
     private :
     string name;
     string number ;
@@ -32,7 +32,7 @@ class data{
 
     public :
 
-    data(string name1,string num,string address1,string city1,string profession1){
+    data1(string name1,string num,string address1,string city1,string profession1){
         name = name1 ;
         number = num ;
         address = address1;
@@ -82,7 +82,7 @@ void addcontact(){
     cout<<"Profession : "<<endl;
     getline(cin,profession) ;
 
-    data cntdata(name,number,address,city,profession);
+    data1 cntdata(name,number,address,city,profession);
     cntdata.storedata();
 
     Sleep(1000);
