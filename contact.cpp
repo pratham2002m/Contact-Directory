@@ -1,10 +1,8 @@
-
 // Libraries Used :
 #include<iostream>
 #include<windows.h>
 #include<fstream>
 #include<string>
-
 
 using namespace std;
 
@@ -19,7 +17,7 @@ void start();
 void storedata();
 
 // Classes 
-class data ;
+// class data ;
 
 
 class data1{
@@ -55,38 +53,58 @@ class data1{
 // Function to add data to contacts
 void addcontact(){
 
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+   
+
     fflush(stdin);
     string name ;
+
+    SetConsoleTextAttribute(h,2);
     cout<<"\nFull Name : "<<endl;
+    SetConsoleTextAttribute(h,15);
     getline(cin,name);
 
     
     
     fflush(stdin) ;
     string number;
+    SetConsoleTextAttribute(h,2);
     cout<<"Mobile Number : "<<endl;
+    SetConsoleTextAttribute(h,15);
     cin>>number;
 
     fflush(stdin) ;
     string city;
+    SetConsoleTextAttribute(h,2);
     cout<<"City : "<<endl;
+    SetConsoleTextAttribute(h,15);
     cin>>city;
 
     fflush(stdin);
     string address;
+    SetConsoleTextAttribute(h,2);
     cout<<"Address : "<<endl;
+    SetConsoleTextAttribute(h,15);
     getline(cin,address);
     
     fflush(stdin);
     string profession;
+    SetConsoleTextAttribute(h,2);
     cout<<"Profession : "<<endl;
+    SetConsoleTextAttribute(h,15);
     getline(cin,profession) ;
+    fflush(stdin);
+
 
     data1 cntdata(name,number,address,city,profession);
+    // data cntdata(name,number,address,city,profession);
     cntdata.storedata();
 
     Sleep(1000);
+
+    SetConsoleTextAttribute(h,4);
     cout<<"Data has been saved successfully !!!"<<endl;
+    SetConsoleTextAttribute(h,15);
 
 }
 
@@ -161,6 +179,9 @@ void updatecontact(string oldname,string newname,string old_number,string new_nu
     string tempfile = "temp.txt";
     ofstream out(tempfile) ;
 
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+   
+
     string file = oldcity.append(".txt") ;
     in.open(file);
 
@@ -208,16 +229,21 @@ void updatecontact(string oldname,string newname,string old_number,string new_nu
 
 // Function to provide options to admin for action
 void adminoptions(){
-    cout<<"Choose your action : \n\n\n";
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(h,15);
+   
+    cout<<"\nChoose your action : \n\n";
 
     int action ;
 
+    SetConsoleTextAttribute(h,5);
     cout<<"1. Add a contact"<<endl;
     cout<<"2. Remove a contact"<<endl;
     cout<<"3. Update a contact\n"<<endl;
 
     cin>>action;
 
+    SetConsoleTextAttribute(h,15);
 
     switch (action)
 {
@@ -230,15 +256,23 @@ void adminoptions(){
     {
         fflush(stdin);
         string name,city,number;
+
+        SetConsoleTextAttribute(h,2);
+   
         cout<<"\nName of user : ";
+        SetConsoleTextAttribute(h,15);
         getline(cin,name);
 
         fflush(stdin);
+        SetConsoleTextAttribute(h,2);
         cout<<"\nCity : ";
+        SetConsoleTextAttribute(h,15);
         getline(cin,city);
 
         fflush(stdin);
+        SetConsoleTextAttribute(h,12);
         cout<<"\nMobile no : ";
+        SetConsoleTextAttribute(h,15);
         cin>>number ;
 
         fflush(stdin);
@@ -249,14 +283,23 @@ void adminoptions(){
     case 3:
     {
         int action ;
+
+        SetConsoleTextAttribute(h,4);
         cout<<"Choose the format : "<<endl;
+        SetConsoleTextAttribute(h,15);
         cout<<"\n1.Name\n2.Mobile No.\n3.Profession\n\n";
         cin>>action;
+
+        SetConsoleTextAttribute(h,15);
+   
 
         string oldname, newname, old_number, new_number, oldcity, newcity, old_address,new_address, old_profession, new_profession ;
 
         fflush(stdin);
+
+        SetConsoleTextAttribute(h,2);
         cout<<"\nCity : ";
+        SetConsoleTextAttribute(h,15);
         getline(cin,oldcity);
 
         switch (action)
@@ -264,38 +307,54 @@ void adminoptions(){
 
         case 1:
             fflush(stdin);
+            SetConsoleTextAttribute(h,2);
             cout<<"\nOld Name : ";
+            SetConsoleTextAttribute(h,15);
             getline(cin,oldname);
 
             fflush(stdin);
+            SetConsoleTextAttribute(h,2);
             cout<<"New Name : ";
+            SetConsoleTextAttribute(h,15);
             getline(cin,newname);
             break;
         
        
         case 2:
             fflush(stdin);
+            SetConsoleTextAttribute(h,2);
             cout<<"\nOld Mobile No : ";
+            SetConsoleTextAttribute(h,15);
             getline(cin,old_number);
 
             fflush(stdin);
+            SetConsoleTextAttribute(h,2);
             cout<<"New Mobile No : ";
+            SetConsoleTextAttribute(h,15);
             getline(cin,new_number);
             break;
         
         case 3:
             fflush(stdin);
+            SetConsoleTextAttribute(h,2);
             cout<<"\nOld Profession : ";
+            SetConsoleTextAttribute(h,15);
             getline(cin,old_profession);
 
             fflush(stdin);
+            SetConsoleTextAttribute(h,2);
             cout<<"New Profession : ";
+            SetConsoleTextAttribute(h,15);
             getline(cin,new_profession);
             break;
         
        
         default:
+
+            SetConsoleTextAttribute(h,4);
             cout<<"\nChoose the correct number !\n"<<endl;
+            SetConsoleTextAttribute(h,15);
+   
             updatecontact(oldname, newname, old_number, new_number, oldcity, newcity, old_address,new_address, old_profession, new_profession);
             break;
         }
@@ -303,7 +362,10 @@ void adminoptions(){
         break;
     }
     default:
+
+        SetConsoleTextAttribute(h,4);  
         cout<<"\nChoose the correct action!\n"<<endl;
+        SetConsoleTextAttribute(h,15);
         adminoptions();
         break;
     
@@ -315,9 +377,15 @@ void adminoptions(){
 // Function for handling admin requests
 void admin(){
 
+     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+   
+
     static int chances = 3 ;
     string password;
+
+    SetConsoleTextAttribute(h,4);
     cout<<"Enter the password : ";
+    SetConsoleTextAttribute(h,15);
     cin>>password ;
     if (password == "1234")
     {
@@ -328,11 +396,14 @@ void admin(){
         chances--;
         if (chances != 0)
         {
+
             cout<<"\n Only "<<chances<<" chances left \n"<<endl;
+            SetConsoleTextAttribute(h,4);
             admin();
         }
         else
         {
+            SetConsoleTextAttribute(h,10);
             cout<<"\n Try again later!!! \n"<<endl;
             Sleep(2000);
             exit(1);
@@ -350,14 +421,23 @@ void admin(){
 
 // This is a function to start the program
 void start(){
-    
-    cout<<"Welcome To Contact Directory \n\n\n\n";
+
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    SetConsoleTextAttribute(h,12); 
+    cout<<"\n\n\nWelcome To Contact Directory \n\n\n\n";
+
+
+    SetConsoleTextAttribute(h,6); 
     cout<<"1. Admin\n";
-    cout<<"2. User\n";
+    cout<<"2. User\n\n";
+    SetConsoleTextAttribute(h,15); 
    
 
     int role ;
-    cout<<"Enter your role : ";
+    SetConsoleTextAttribute(h,2); 
+    cout<<"\nEnter your role : ";
+    SetConsoleTextAttribute(h,15); 
     cin>>role;
     
     if (role == 1)
@@ -375,15 +455,21 @@ void start(){
 int main(){
 
     start();
+
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+     SetConsoleTextAttribute(h,6);
    
    char repeat ;
-   cout<<"Want to do it again ? y/n : ";
+   cout<<"\n\nWant to do it again ? y/n : ";
    cin>>repeat;
    cout<<"\n\n";
    if (repeat == 'y')
    {
+     SetConsoleTextAttribute(h,15);
       main();
    }
+
+//    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
    
 
  return 0;
@@ -392,30 +478,40 @@ int main(){
 void user(){
     string city,name,profession,number;
 
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
     fflush(stdin);
+    SetConsoleTextAttribute(h,2);
     cout<<"\n\nEnter the City : ";
+    SetConsoleTextAttribute(h,15);
     getline(cin,city);
 
     ifstream in;
     string file = city.append(".txt");
     in.open(file);
  
-    cout<<"\n\nEnter info you know : "<<endl;
+    SetConsoleTextAttribute(h,4);
+    cout<<"\n\nEnter info you know : \n"<<endl;
 
     int choice,flag=0 ;
     string str;
     string sname,snumber,sprofession; // To search by mobile and profession
 
-    cout<<"1.Name only\n2.Mobile No. only\n3.Profession only\n4.Name & Profession\n5.Name & Mobile No\n6.Profession & Mobile No\n7.Name,Mobile No,Profession"<<endl;
+    SetConsoleTextAttribute(h,9);
+    cout<<"1.Name only\n2.Mobile No. only\n3.Profession only\n4.Name & Profession\n5.Name & Mobile No\n6.Profession & Mobile No\n7.Name,Mobile No,Profession\n"<<endl;
+    SetConsoleTextAttribute(h,15);
 
     cin>>choice;
+    cout<<"\n";
 
     switch (choice)
     {
     case 1:    // Name Only
 
         fflush(stdin);
+    SetConsoleTextAttribute(h,2);
         cout<<"Enter the name : ";
+    SetConsoleTextAttribute(h,15);
         getline(cin,name);
 
         getline(in,str);
@@ -439,14 +535,17 @@ void user(){
         }
         if (flag == 0)
         {
-            cout<<"Data is not found"<<endl;
+            SetConsoleTextAttribute(h,15);  
+            cout<<"Data is not found !!!"<<endl;
         }
         
         break;
  
     case 2:   // Mobile No. only
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter Mobile No : ";
+        SetConsoleTextAttribute(h,15);  
         cin>>number ;
 
         fflush(stdin);
@@ -480,7 +579,8 @@ void user(){
             
         if (flag == 0)
         {
-            cout<<"Data is not found"<<endl;
+        SetConsoleTextAttribute(h,4);  
+            cout<<"Data is not found !!!"<<endl;
         }
         
         break;
@@ -488,7 +588,9 @@ void user(){
 
         getline(in,str);
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the profession : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,profession);
         
@@ -523,18 +625,23 @@ void user(){
         }
         if (flag == 0)
         {
-            cout<<"Data is not found"<<endl;
+        SetConsoleTextAttribute(h,4);  
+            cout<<"Data is not found !!!"<<endl;
         }
         
         break;
     
     case 4:      // Name & Profession
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the Name : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,name);
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the Profession : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,profession);
 
@@ -568,18 +675,23 @@ void user(){
         }
         if (flag == 0)
         {
-            cout<<"Data is not found"<<endl;
+        SetConsoleTextAttribute(h,4);  
+            cout<<"Data is not found !!!"<<endl;
         }
         
         break;
 
     case 5:       //  Name & Mobile No
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the Name : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,name);
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the Mobile No : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,number);
 
@@ -614,18 +726,23 @@ void user(){
         }
         if (flag == 0)
         {
-            cout<<"Data is not found"<<endl;
+        SetConsoleTextAttribute(h,4);  
+            cout<<"Data is not found !!!"<<endl;
         }
         
         break;
     
     case 6:                // Profession & Mobile No
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the Mobile No : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,number);
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the Profession : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,profession);
         
@@ -661,7 +778,7 @@ void user(){
         }
         if (flag == 0)
         {
-            cout<<"Data is not found"<<endl;
+            cout<<"Data is not found !!!"<<endl;
         }
         
         break;
@@ -669,15 +786,21 @@ void user(){
 
         getline(in,str);
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the name : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,name);
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the Mobile No : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,number);
 
+        SetConsoleTextAttribute(h,2);  
         cout<<"Enter the Profession : ";
+        SetConsoleTextAttribute(h,15);  
         fflush(stdin);
         getline(cin,profession);
 
@@ -713,13 +836,16 @@ void user(){
         }
         if (flag == 0)
         {
-            cout<<"Data is not found"<<endl;
+        SetConsoleTextAttribute(h,4);  
+            cout<<"Data is not found !!!"<<endl;
         }
         
         break;
     
     default:
+        SetConsoleTextAttribute(h,4);  
         cout<<"Enter the correct option !!! ";
+        SetConsoleTextAttribute(h,15);  
         user();
         break;
     }
