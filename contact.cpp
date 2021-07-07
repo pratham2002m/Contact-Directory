@@ -3,6 +3,7 @@
 #include<windows.h>
 #include<fstream>
 #include<string>
+#include<time.h>
 
 using namespace std;
 
@@ -15,9 +16,15 @@ void admin();
 void user();
 void start();
 void storedata();
+void userlogin();
+int login();
+void changepassword();
+void newaccount();
 
 // Classes 
-// class data ;
+class data1 ;
+
+   HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
 class data1{
@@ -53,7 +60,7 @@ class data1{
 // Function to add data to contacts
 void addcontact(){
 
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    
    
 
     fflush(stdin);
@@ -179,7 +186,7 @@ void updatecontact(string oldname,string newname,string old_number,string new_nu
     string tempfile = "temp.txt";
     ofstream out(tempfile) ;
 
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    
    
 
     string file = oldcity.append(".txt") ;
@@ -229,7 +236,7 @@ void updatecontact(string oldname,string newname,string old_number,string new_nu
 
 // Function to provide options to admin for action
 void adminoptions(){
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    
     SetConsoleTextAttribute(h,15);
    
     cout<<"\nChoose your action : \n\n";
@@ -377,7 +384,7 @@ void adminoptions(){
 // Function for handling admin requests
 void admin(){
 
-     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+     
    
 
     static int chances = 3 ;
@@ -422,7 +429,7 @@ void admin(){
 // This is a function to start the program
 void start(){
 
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    
 
     SetConsoleTextAttribute(h,12); 
     cout<<"\n\n\nWelcome To Contact Directory \n\n\n\n";
@@ -456,11 +463,11 @@ int main(){
 
     start();
 
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    
      SetConsoleTextAttribute(h,6);
    
    char repeat ;
-   cout<<"\n\nWant to do it again ? y/n : ";
+   cout<<"\n\nTRY AGAIN ? y/n : ";
    cin>>repeat;
    cout<<"\n\n";
    if (repeat == 'y')
@@ -469,16 +476,176 @@ int main(){
       main();
    }
 
-//    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
    
 
  return 0;
 }
 
+
+
+// User login,change password,signup features
+
+int login(){
+    string id,password,str;
+    char change_password ;
+    int check = 0;
+    SetConsoleTextAttribute(h,6);
+    cout<<"\nEnter your ID : ";
+    SetConsoleTextAttribute(h,15);
+    cin>>id;
+    SetConsoleTextAttribute(h,6);
+    cout<<"\nPassword : ";
+    SetConsoleTextAttribute(h,15);
+    cin>>password ;
+
+    ifstream in("userdata.txt");
+    ofstream out("temp.txt");
+    getline(in,str);
+
+    while (!in.eof())
+    {
+       if (str == "ID : " + id)
+       {
+           out<<str<<"\n";
+           getline(in,str);
+           if (str == "Password : " + password)
+           {
+                SetConsoleTextAttribute(h,6);
+                cout<<"\nChange Password ? y/n \n";
+                SetConsoleTextAttribute(h,15);
+                cin>>change_password ;
+
+               check = 1;
+               if (change_password == 'y')
+               {
+                   string newpassword;
+                   SetConsoleTextAttribute(h,6);
+                   cout<<"Enter new password : ";
+                   SetConsoleTextAttribute(h,15);
+                   cin>>newpassword ;
+                   out<<"Password : "<<newpassword<<"\n";
+                   
+
+               }
+               else
+               {
+                   out<<str<<"\n";
+               }
+               
+
+                getline(in,str);
+                cout<<str<<"\n";
+                out<<"\nLast login : "<<__DATE__<<" "<<__TIME__<<"\n";
+                getline(in,str);
+           }
+           
+       }
+
+       out<<str<<"\n";
+       getline(in,str);
+       
+    }
+
+    in.close();
+    out.close();
+
+    remove("userdata.txt");
+    rename("temp.txt","userdata.txt");
+
+    
+    if (check == 1)
+    {
+        return 1;
+    }
+    
+
+    return 0;
+    
+}
+
+void newaccount(){
+
+    string id,password ;
+
+    SetConsoleTextAttribute(h,8);
+    cout<<"\nCreate your ID : ";
+    SetConsoleTextAttribute(h,15);
+    cin>>id ;
+    SetConsoleTextAttribute(h,8);
+    cout<<"\nPassword : ";
+    SetConsoleTextAttribute(h,15);
+    cin>>password ;
+
+    ofstream out("userdata.txt",ios::app);
+    out<<"\nID : "<<id<<"\n";
+    out<<"Password : "<<password<<"\n" ;
+    out<<"Last login : "<<__DATE__<<" "<<__TIME__<<"\n";
+
+    out.close();
+
+    SetConsoleTextAttribute(h,2);
+    cout<<"\n\n\n ********  Welcome To Contact - Directory  ******* \n\n ";
+    exit(1);
+
+}
+
+void userlogin(){
+
+    int choice;
+    SetConsoleTextAttribute(h,6);
+    cout<<"\n1.Login\n2.Create Account\n"<<endl;
+    SetConsoleTextAttribute(h,15);
+    cin>>choice;
+
+    switch (choice)
+    {
+    case 1:
+    {
+                int c = 3 ;
+                while (c != 0)
+                {
+                        int a = login();
+                        if (a == 0)
+                        {
+                            c -- ;
+                            SetConsoleTextAttribute(h,3);
+                            cout<<"\n\nEnter the correct data !!!"<<endl;
+                            cout<<"Only "<<c<<" chances left !!!"<<endl;
+                            SetConsoleTextAttribute(h,15);
+                        }
+                        else
+                        {
+                            return ;
+                        }
+                        
+                }
+                
+                    cout<<"Try Again Later"<<endl;
+                    exit(1);
+                
+                break;
+    }
+    case 2:
+        newaccount();
+        break;
+    
+    default:
+        break;
+    }
+
+}
+
+
+
 void user(){
+
+    userlogin();
+
+
+
     string city,name,profession,number;
 
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    
 
     fflush(stdin);
     SetConsoleTextAttribute(h,2);
@@ -489,6 +656,15 @@ void user(){
     ifstream in;
     string file = city.append(".txt");
     in.open(file);
+
+    if (in.eof() == 0)
+    {
+        SetConsoleTextAttribute(h,8);
+        cout<<"No such city found !!!"<<endl;
+        SetConsoleTextAttribute(h,15);
+        return ;
+    }
+    
  
     SetConsoleTextAttribute(h,4);
     cout<<"\n\nEnter info you know : \n"<<endl;
