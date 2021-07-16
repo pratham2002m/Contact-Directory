@@ -6,58 +6,47 @@
 #include<time.h>
 #include<conio.h>
 
+// #include "addcontact.h"
+#include "load.h"
+#include "adminoptions.h"
+#include "userlogin.h"
+// #include "newaccount.h"
+
 using namespace std;
 
 //  Functions 
-void adminoptions();
-void addcontact();
-void removecontact(string,string,string);
-void updatecontact(string,string,string,string,string,string,string,string,string,string);
+// void adminoptions();
+
+// void addcontact();
+
+// void removecontact(string,string,string);
+
+// void updatecontact(string,string,string,string,string,string,string,string,string,string);
+
 void admin();
 void user();
+ 
 void start();
-void storedata();
-void userlogin();
-int login();
+
+// void storedata();
+
+// void userlogin();
+
+// int login();
+
 void changepassword();
-void newaccount();
-void gotoxy(short , short);
-void load();
+
+// void newaccount();
+
+// void gotoxy(short , short);
+
+// void load();
 
 // Classes 
 class data1 ;
 
-   HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
-class data1{
-    private :
-    string name;
-    string number ;
-    string address ;
-    string city ;
-    string profession ;
-
-    public :
-
-    data1(string name1,string num,string address1,string city1,string profession1){
-        name = name1 ;
-        number = num ;
-        address = address1;
-        city = city1;
-        profession = profession1;
-
-    }
-
-    void storedata(){
-        ofstream out;
-        string file = city + ".txt";
-        out.open(file,std::ios::app);
-        out<<"\nName : "<<name<<"\nMobile no : "<<number<<"\nProfession : "<<profession<<"\nCity : "<<city<<"\nAddress : "<<address<<endl;
-        out.close();
-
-    }
-};
 
 int main(){
 
@@ -105,9 +94,16 @@ void start(){
     {
         admin();
     }
-    else
+    else if(role == 2)
     {
         user();
+    }
+    else
+    {
+        gotoxy(30,20);
+        cout<<"Please Enter The Correct Option !!! "<<endl;
+        getch();
+        start();
     }
 
 }
@@ -160,557 +156,455 @@ void admin(){
 };
 
 // Function to provide options to admin for action
-void adminoptions(){
+// void adminoptions(){
     
-    system("cls");
-    SetConsoleTextAttribute(h,12); 
-    gotoxy(74,7);
-    cout<<"Welcome To Contact Directory \n\n\n\n";
-    SetConsoleTextAttribute(h,2);
-    gotoxy(30,10);
-    cout<<"Choose your action : ";
+//     system("cls");
+//     SetConsoleTextAttribute(h,12); 
+//     gotoxy(74,7);
+//     cout<<"Welcome To Contact Directory \n\n\n\n";
+//     SetConsoleTextAttribute(h,2);
+//     gotoxy(30,10);
+//     cout<<"Choose your action : ";
 
-    int action ;
+//     int action ;
 
-    SetConsoleTextAttribute(h,14);
-    gotoxy(30,12);
-    cout<<"1. Add a contact"<<endl;
-    SetConsoleTextAttribute(h,3);
-    gotoxy(30,13);
-    cout<<"2. Remove a contact"<<endl;
-    SetConsoleTextAttribute(h,4);
-    gotoxy(30,14);
-    cout<<"3. Update a contact ";
-    SetConsoleTextAttribute(h,7);
-    gotoxy(30,16);
-    cin>>action;
+//     SetConsoleTextAttribute(h,14);
+//     gotoxy(30,12);
+//     cout<<"1. Add a contact"<<endl;
+//     SetConsoleTextAttribute(h,3);
+//     gotoxy(30,13);
+//     cout<<"2. Remove a contact"<<endl;
+//     SetConsoleTextAttribute(h,4);
+//     gotoxy(30,14);
+//     cout<<"3. Update a contact ";
+//     SetConsoleTextAttribute(h,7);
+//     gotoxy(30,16);
+//     cin>>action;
 
-    SetConsoleTextAttribute(h,15);
+//     SetConsoleTextAttribute(h,15);
 
-    switch (action)
-    {
+//     switch (action)
+//     {
 
-    case 1:
-        addcontact();
-        break;
+//     case 1:
+//         addcontact();
+//         break;
     
-    case 2:
-    {
-        fflush(stdin);
-        SetConsoleTextAttribute(h,12);
-        gotoxy(78,18);
-        cout<<"REMOVE CONTACT FORM";
-        string name,city,number;
+//     case 2:
+//     {
+//         fflush(stdin);
+//         SetConsoleTextAttribute(h,12);
+//         gotoxy(78,18);
+//         cout<<"REMOVE CONTACT FORM";
+//         string name,city,number;
 
-        SetConsoleTextAttribute(h,14);
-        gotoxy(30,21);
-        cout<<"Name of user : ";
-        SetConsoleTextAttribute(h,15);
-        getline(cin,name);
+//         SetConsoleTextAttribute(h,14);
+//         gotoxy(30,21);
+//         cout<<"Name of user : ";
+//         SetConsoleTextAttribute(h,15);
+//         getline(cin,name);
 
-        fflush(stdin);
-        SetConsoleTextAttribute(h,14);
-        gotoxy(30,23);
-        cout<<"City : ";
-        SetConsoleTextAttribute(h,15);
-        getline(cin,city);
+//         fflush(stdin);
+//         SetConsoleTextAttribute(h,14);
+//         gotoxy(30,23);
+//         cout<<"City : ";
+//         SetConsoleTextAttribute(h,15);
+//         getline(cin,city);
 
-        fflush(stdin);
-        SetConsoleTextAttribute(h,14);
-        gotoxy(30,25);
-        cout<<"Mobile no : ";
-        SetConsoleTextAttribute(h,15);
-        cin>>number ;
+//         fflush(stdin);
+//         SetConsoleTextAttribute(h,14);
+//         gotoxy(30,25);
+//         cout<<"Mobile no : ";
+//         SetConsoleTextAttribute(h,15);
+//         cin>>number ;
 
-        fflush(stdin);
-        removecontact(name,city,number);
+//         fflush(stdin);
+//         removecontact(name,city,number);
 
-        break;
-    }
-    case 3:
-    {
-        int action ;
+//         break;
+//     }
+//     case 3:
+//     {
+//         int action ;
 
-        SetConsoleTextAttribute(h,12);
-        gotoxy(78,18);
-        cout<<"UPDATE CONTACT FORM";
+//         SetConsoleTextAttribute(h,12);
+//         gotoxy(78,18);
+//         cout<<"UPDATE CONTACT FORM";
 
-        gotoxy(30,21);
-        SetConsoleTextAttribute(h,10);
-        cout<<"Choose the format : "<<endl;
-        SetConsoleTextAttribute(h,14);
-        gotoxy(30,23);
-        cout<<"1.Name";
-        gotoxy(30,25);
-        cout<<"2.Mobile No.";
-        gotoxy(30,27);
-        cout<<"3.Profession ";
-        gotoxy(49,27);
-        SetConsoleTextAttribute(h,15);
-        cin>>action;
+//         gotoxy(30,21);
+//         SetConsoleTextAttribute(h,10);
+//         cout<<"Choose the format : "<<endl;
+//         SetConsoleTextAttribute(h,14);
+//         gotoxy(30,23);
+//         cout<<"1.Name";
+//         gotoxy(30,25);
+//         cout<<"2.Mobile No.";
+//         gotoxy(30,27);
+//         cout<<"3.Profession ";
+//         gotoxy(49,27);
+//         SetConsoleTextAttribute(h,15);
+//         cin>>action;
 
-        SetConsoleTextAttribute(h,15);
+//         SetConsoleTextAttribute(h,15);
    
 
-        string oldname, newname, old_number, new_number, oldcity, newcity, old_address,new_address, old_profession, new_profession ;
+//         string oldname, newname, old_number, new_number, oldcity, newcity, old_address,new_address, old_profession, new_profession ;
 
-        fflush(stdin);
+//         fflush(stdin);
 
-        SetConsoleTextAttribute(h,11);
-        gotoxy(30,29);
-        cout<<"City : ";
-        SetConsoleTextAttribute(h,15);
-        getline(cin,oldcity);
+//         SetConsoleTextAttribute(h,11);
+//         gotoxy(30,29);
+//         cout<<"City : ";
+//         SetConsoleTextAttribute(h,15);
+//         getline(cin,oldcity);
 
-        switch (action)
-        {
+//         switch (action)
+//         {
 
-        case 1:
-            fflush(stdin);
-            SetConsoleTextAttribute(h,2);
-            gotoxy(30,31);
-            cout<<"Old Name : ";
-            SetConsoleTextAttribute(h,15);
-            getline(cin,oldname);
+//         case 1:
+//             fflush(stdin);
+//             SetConsoleTextAttribute(h,2);
+//             gotoxy(30,31);
+//             cout<<"Old Name : ";
+//             SetConsoleTextAttribute(h,15);
+//             getline(cin,oldname);
 
-            fflush(stdin);
-            SetConsoleTextAttribute(h,2);
-            gotoxy(30,33);
-            cout<<"New Name : ";
-            SetConsoleTextAttribute(h,15);
-            getline(cin,newname);
-            gotoxy(30,35);
-            break;
+//             fflush(stdin);
+//             SetConsoleTextAttribute(h,2);
+//             gotoxy(30,33);
+//             cout<<"New Name : ";
+//             SetConsoleTextAttribute(h,15);
+//             getline(cin,newname);
+//             gotoxy(30,35);
+//             break;
         
        
-        case 2:
-            fflush(stdin);
-            SetConsoleTextAttribute(h,2);
-            gotoxy(30,31);
-            cout<<"Old Mobile No : ";
-            SetConsoleTextAttribute(h,15);
-            getline(cin,old_number);
+//         case 2:
+//             fflush(stdin);
+//             SetConsoleTextAttribute(h,2);
+//             gotoxy(30,31);
+//             cout<<"Old Mobile No : ";
+//             SetConsoleTextAttribute(h,15);
+//             getline(cin,old_number);
 
-            fflush(stdin);
-            SetConsoleTextAttribute(h,2);
-            gotoxy(30,33);
-            cout<<"New Mobile No : ";
-            SetConsoleTextAttribute(h,15);
-            getline(cin,new_number);
-            gotoxy(30,35);
-            break;
+//             fflush(stdin);
+//             SetConsoleTextAttribute(h,2);
+//             gotoxy(30,33);
+//             cout<<"New Mobile No : ";
+//             SetConsoleTextAttribute(h,15);
+//             getline(cin,new_number);
+//             gotoxy(30,35);
+//             break;
         
-        case 3:
-            fflush(stdin);
-            SetConsoleTextAttribute(h,2);
-            gotoxy(30,31);
-            cout<<"Old Profession : ";
-            SetConsoleTextAttribute(h,15);
-            getline(cin,old_profession);
+//         case 3:
+//             fflush(stdin);
+//             SetConsoleTextAttribute(h,2);
+//             gotoxy(30,31);
+//             cout<<"Old Profession : ";
+//             SetConsoleTextAttribute(h,15);
+//             getline(cin,old_profession);
 
-            fflush(stdin);
-            SetConsoleTextAttribute(h,2);
-            gotoxy(30,33);
-            cout<<"New Profession : ";
-            SetConsoleTextAttribute(h,15);
-            getline(cin,new_profession);
-            gotoxy(30,35);
-            break;
+//             fflush(stdin);
+//             SetConsoleTextAttribute(h,2);
+//             gotoxy(30,33);
+//             cout<<"New Profession : ";
+//             SetConsoleTextAttribute(h,15);
+//             getline(cin,new_profession);
+//             gotoxy(30,35);
+//             break;
         
        
-        default:
+//         default:
 
-            SetConsoleTextAttribute(h,4);
-            gotoxy(75,31);
-            cout<<"Choose the correct number!!!";
-            SetConsoleTextAttribute(h,15);
-            gotoxy(30,33);
-            updatecontact(oldname, newname, old_number, new_number, oldcity, newcity, old_address,new_address, old_profession, new_profession);
-            break;
-        }
-        updatecontact(oldname, newname, old_number, new_number, oldcity, newcity, old_address,new_address, old_profession, new_profession);
-        break;
-    }
-    default:
+//             SetConsoleTextAttribute(h,4);
+//             gotoxy(75,31);
+//             cout<<"Choose the correct number!!!";
+//             SetConsoleTextAttribute(h,15);
+//             gotoxy(30,33);
+//             updatecontact(oldname, newname, old_number, new_number, oldcity, newcity, old_address,new_address, old_profession, new_profession);
+//             break;
+//         }
+//         updatecontact(oldname, newname, old_number, new_number, oldcity, newcity, old_address,new_address, old_profession, new_profession);
+//         break;
+//     }
+//     default:
 
-        SetConsoleTextAttribute(h,4);  
-        gotoxy(75,18);
-        cout<<"Choose the correct action!!! ";
-        getch();
-        SetConsoleTextAttribute(h,15);
-        gotoxy(30,20);
-        adminoptions();
-        break;   
-}
-};
+//         SetConsoleTextAttribute(h,4);  
+//         gotoxy(75,18);
+//         cout<<"Choose the correct action!!! ";
+//         getch();
+//         SetConsoleTextAttribute(h,15);
+//         gotoxy(30,20);
+//         adminoptions();
+//         break;   
+// }
+// };
 
 // Function to add data to contacts
-void addcontact(){
+// void addcontact(){
 
-    fflush(stdin);
-    string name ;
-    SetConsoleTextAttribute(h,12);
-    gotoxy(80,18);
-    cout<<"ADD CONTACT FORM";
-    SetConsoleTextAttribute(h,14);
-    gotoxy(30,21);
-    cout<<"Full Name : ";
-    SetConsoleTextAttribute(h,15);
-    getline(cin,name);
+//     fflush(stdin);
+//     string name ;
+//     SetConsoleTextAttribute(h,12);
+//     gotoxy(80,18);
+//     cout<<"ADD CONTACT FORM";
+//     SetConsoleTextAttribute(h,14);
+//     gotoxy(30,21);
+//     cout<<"Full Name : ";
+//     SetConsoleTextAttribute(h,15);
+//     getline(cin,name);
 
-    fflush(stdin) ;
-    string number;
-    SetConsoleTextAttribute(h,14);
-    gotoxy(30,23);
-    cout<<"Mobile Number : ";
-    SetConsoleTextAttribute(h,15);
-    cin>>number;
+//     fflush(stdin) ;
+//     string number;
+//     SetConsoleTextAttribute(h,14);
+//     gotoxy(30,23);
+//     cout<<"Mobile Number : ";
+//     SetConsoleTextAttribute(h,15);
+//     cin>>number;
 
-    fflush(stdin) ;
-    string city;
-    SetConsoleTextAttribute(h,14);
-    gotoxy(30,25);
-    cout<<"City : ";
-    SetConsoleTextAttribute(h,15);
-    cin>>city;
+//     fflush(stdin) ;
+//     string city;
+//     SetConsoleTextAttribute(h,14);
+//     gotoxy(30,25);
+//     cout<<"City : ";
+//     SetConsoleTextAttribute(h,15);
+//     cin>>city;
 
-    fflush(stdin);
-    string address;
-    SetConsoleTextAttribute(h,14);
-    gotoxy(30,27);
-    cout<<"Address : ";
-    SetConsoleTextAttribute(h,15);
-    getline(cin,address);
+//     fflush(stdin);
+//     string address;
+//     SetConsoleTextAttribute(h,14);
+//     gotoxy(30,27);
+//     cout<<"Address : ";
+//     SetConsoleTextAttribute(h,15);
+//     getline(cin,address);
     
-    fflush(stdin);
-    string profession;
-    SetConsoleTextAttribute(h,14);
-    gotoxy(30,29);
-    cout<<"Profession : ";
-    SetConsoleTextAttribute(h,15);
-    getline(cin,profession) ;
-    fflush(stdin);
+//     fflush(stdin);
+//     string profession;
+//     SetConsoleTextAttribute(h,14);
+//     gotoxy(30,29);
+//     cout<<"Profession : ";
+//     SetConsoleTextAttribute(h,15);
+//     getline(cin,profession) ;
+//     fflush(stdin);
 
 
-    data1 cntdata(name,number,address,city,profession);
-    // data cntdata(name,number,address,city,profession);
-    cntdata.storedata();
+//     data1 cntdata(name,number,address,city,profession);
+//     // data cntdata(name,number,address,city,profession);
+//     cntdata.storedata();
 
-    Sleep(1000);
+//     Sleep(1000);
 
-    SetConsoleTextAttribute(h,11);
-    gotoxy(71,31);
-    cout<<"Data has been saved successfully !!!";
-    SetConsoleTextAttribute(h,15);
-    gotoxy(30,33);
+//     SetConsoleTextAttribute(h,11);
+//     gotoxy(71,31);
+//     cout<<"Data has been saved successfully !!!";
+//     SetConsoleTextAttribute(h,15);
+//     gotoxy(30,33);
 
-}
+// }
 
-void removecontact(string name,string city,string number){
+// void removecontact(string name,string city,string number){
 
-    string str;
-    ifstream in ;
+//     string str;
+//     ifstream in ;
 
-    string tempfile = "temp.txt";
-    ofstream out(tempfile) ;
-    string file = city.append(".txt") ;
-    in.open(file);
-    getline(in,str);
-    while (!in.eof())
-    {
-        if (str == "Name : " + name)
-        {
-             getline(in,str);
-             if (str == "Mobile no : " + number)
-             {
-                 SetConsoleTextAttribute(h,11);
-                 gotoxy(71,28);
-                 cout<<"Data has been removed successfully !!!\n\n\n"<<endl;
+//     string tempfile = "temp.txt";
+//     ofstream out(tempfile) ;
+//     string file = city.append(".txt") ;
+//     in.open(file);
+//     getline(in,str);
+//     while (!in.eof())
+//     {
+//         if (str == "Name : " + name)
+//         {
+//              getline(in,str);
+//              if (str == "Mobile no : " + number)
+//              {
+//                  SetConsoleTextAttribute(h,11);
+//                  gotoxy(71,28);
+//                  cout<<"Data has been removed successfully !!!\n\n\n"<<endl;
 
-                  // To delete address city profession
-                getline(in,str); 
-                getline(in,str);
-                getline(in,str);
-                getline(in,str);
-                getline(in,str);
-                gotoxy(30,30);
-             }
-             else       // If mobile number is not same
-             {
-                 out<<str<<"\n";
+//                   // To delete address city profession
+//                 getline(in,str); 
+//                 getline(in,str);
+//                 getline(in,str);
+//                 getline(in,str);
+//                 getline(in,str);
+//                 gotoxy(30,30);
+//              }
+//              else       // If mobile number is not same
+//              {
+//                  out<<str<<"\n";
 
-                 getline(in,str);
-                 out<<str<<"\n";
+//                  getline(in,str);
+//                  out<<str<<"\n";
 
-                 getline(in,str);
-                 out<<str<<"\n";
+//                  getline(in,str);
+//                  out<<str<<"\n";
 
-                 getline(in,str);
-                 out<<str<<"\n";
+//                  getline(in,str);
+//                  out<<str<<"\n";
 
-                 getline(in,str);
-                 out<<str<<"\n";
+//                  getline(in,str);
+//                  out<<str<<"\n";
 
                  
                 
-             }
+//              }
              
-        }
+//         }
        
-         out<<str<<"\n";
-         getline(in,str); 
-         gotoxy(30,30);
-    }
+//          out<<str<<"\n";
+//          getline(in,str); 
+//          gotoxy(30,30);
+//     }
 
-    in.close();
-    out.close();
+//     in.close();
+//     out.close();
 
-    remove(file.c_str());
-    rename("temp.txt",file.c_str());
+//     remove(file.c_str());
+//     rename("temp.txt",file.c_str());
 
 
-}
+// }
 
-void updatecontact(string oldname,string newname,string old_number,string new_number,string oldcity,string newcity,string old_address,string new_address,string old_profession,string new_profession){
+// void updatecontact(string oldname,string newname,string old_number,string new_number,string oldcity,string newcity,string old_address,string new_address,string old_profession,string new_profession){
 
-    string str;
-    ifstream in ;
+//     string str;
+//     ifstream in ;
 
-    string tempfile = "temp.txt";
-    ofstream out(tempfile) ;
+//     string tempfile = "temp.txt";
+//     ofstream out(tempfile) ;
 
     
    
 
-    string file = oldcity.append(".txt") ;
-    in.open(file);
+//     string file = oldcity.append(".txt") ;
+//     in.open(file);
 
-    getline(in,str);
+//     getline(in,str);
 
-    while (!in.eof())
-    {
-        if (str == "Name : " + oldname)
-        {
-            out<<"Name : " + newname<<"\n" ;    
-            getline(in,str);
-        }
+//     while (!in.eof())
+//     {
+//         if (str == "Name : " + oldname)
+//         {
+//             out<<"Name : " + newname<<"\n" ;    
+//             getline(in,str);
+//         }
 
-        if (str == "Mobile no : " + old_number)
-        {
-            out<<"Mobile no : " + new_number<<"\n" ; 
-            getline(in,str);   
-        }
+//         if (str == "Mobile no : " + old_number)
+//         {
+//             out<<"Mobile no : " + new_number<<"\n" ; 
+//             getline(in,str);   
+//         }
 
-        if (str == "Address : " + old_address)
-        {
-            out<<"Address : " + new_address<<"\n" ;    
-            getline(in,str);
-        }
+//         if (str == "Address : " + old_address)
+//         {
+//             out<<"Address : " + new_address<<"\n" ;    
+//             getline(in,str);
+//         }
 
-        if (str == "Profession : " + old_profession)
-        {
-            out<<"Profession : " + new_profession<<"\n" ;    
-            getline(in,str);
-        }
+//         if (str == "Profession : " + old_profession)
+//         {
+//             out<<"Profession : " + new_profession<<"\n" ;    
+//             getline(in,str);
+//         }
 
        
-        out<<str<<"\n";
-        getline(in,str);
+//         out<<str<<"\n";
+//         getline(in,str);
         
-    }
+//     }
 
-    in.close();
-    out.close();
+//     in.close();
+//     out.close();
 
-    remove(file.c_str());
-    rename("temp.txt",file.c_str());
-}
+//     remove(file.c_str());
+//     rename("temp.txt",file.c_str());
+// }
 
 // User login,change password,signup features
-int login(){
-    system("cls");
-    SetConsoleTextAttribute(h,12); 
-    gotoxy(74,7);
-    cout<<"Welcome To Contact Directory \n\n\n\n";
 
-    gotoxy(79,10);
-    SetConsoleTextAttribute(h,11);
-    cout<<"USER LOGIN PORTAL";
-    string id,password,str;
-    char change_password ;
-    int check = 0,count=0;
-    SetConsoleTextAttribute(h,6);
-    gotoxy(30,13);
-    cout<<"Enter your ID : ";
-    SetConsoleTextAttribute(h,15);
-    cin>>id;
-    SetConsoleTextAttribute(h,6);
-    gotoxy(30,15);
-    cout<<"Password : ";
-    SetConsoleTextAttribute(h,15);
-    cin>>password ;
-    ifstream in("userdata.txt");
-    ofstream out("temp.txt");
-    getline(in,str);
+// void newaccount(){
 
-    while (!in.eof())
-    {
-       if (str == "ID : " + id)
-       {
-           out<<str<<"\n";
-           getline(in,str);
-           if (str == "Password : " + password && count == 0)
-           {   
-                load();
-                SetConsoleTextAttribute(h,12); 
-                gotoxy(74,7);
-                cout<<"Welcome To Contact Directory \n\n\n\n";
+//     string id,password ;
 
-                gotoxy(79,10);
-                SetConsoleTextAttribute(h,11);
-                cout<<"USER LOGIN PORTAL";
-                SetConsoleTextAttribute(h,13);
-                gotoxy(30,12);
-                cout<<"Glad To See You , "<<id;
-                SetConsoleTextAttribute(h,14);
-                gotoxy(30,14);
-                cout<<"Would You Like To Change Your Password ? y/n    ";
-                SetConsoleTextAttribute(h,15);
-                cin>>change_password;
+//     SetConsoleTextAttribute(h,8);
+//     gotoxy(30,16);
+//     cout<<"Create your ID : ";
+//     SetConsoleTextAttribute(h,15);
+//     cin>>id ;
+//     SetConsoleTextAttribute(h,8);
+//     gotoxy(30,18);
+//     cout<<"Password : ";
+//     SetConsoleTextAttribute(h,15);
+//     cin>>password ;
 
-               check = 1;
-               if (change_password == 'y' && count == 0)
-               {
-                   string newpassword;
-                   SetConsoleTextAttribute(h,6);
-                   gotoxy(30,16);
-                   cout<<"Please Enter Your New Password : ";
-                   SetConsoleTextAttribute(h,15);
-                   cin>>newpassword ;
-                   out<<"Password : "<<newpassword<<"\n";
-                   count++;
-               }
-               else
-               {
-                   out<<str<<"\n";
-                   count++;
-                   SetConsoleTextAttribute(h,6);
-                   gotoxy(30,16);
-                   cout<<"You can change your PassWord Anytime By Logging in Again";
-               }
-               
+//     ofstream out("userdata.txt",ios::app);
+//     out<<"\nID : "<<id<<"\n";
+//     out<<"Password : "<<password<<"\n" ;
+//     out<<"Last login : "<<__DATE__<<" "<<__TIME__<<"\n";
 
-                getline(in,str);
-                cout<<str<<"\n";
-                out<<"\nLast login : "<<__DATE__<<" "<<__TIME__<<"\n";
-                getline(in,str);
-           }
-           
-       }
+//     out.close();
 
-       out<<str<<"\n";
-       getline(in,str);
-       
-    }
+//     SetConsoleTextAttribute(h,2);
+//     gotoxy(64,20);
+//     cout<<"********  Welcome To Contact - Directory  ********";
+//     exit(1);
 
-    in.close();
-    out.close();
+// }
 
-    remove("userdata.txt");
-    rename("temp.txt","userdata.txt");
+// void userlogin(){
 
-    
-    if (check == 1)
-    {
-        return 1;
-    }
-    
+//     int choice;
+//     SetConsoleTextAttribute(h,6);
+//     gotoxy(30,12);
+//     cout<<"1.Login";
+//     gotoxy(30,14);
+//     cout<<"2.Create Account     ";
+//     SetConsoleTextAttribute(h,15);
+//     cin>>choice;
 
-    return 0;
-    
-}
-
-void newaccount(){
-
-    string id,password ;
-
-    SetConsoleTextAttribute(h,8);
-    gotoxy(30,16);
-    cout<<"Create your ID : ";
-    SetConsoleTextAttribute(h,15);
-    cin>>id ;
-    SetConsoleTextAttribute(h,8);
-    gotoxy(30,18);
-    cout<<"Password : ";
-    SetConsoleTextAttribute(h,15);
-    cin>>password ;
-
-    ofstream out("userdata.txt",ios::app);
-    out<<"\nID : "<<id<<"\n";
-    out<<"Password : "<<password<<"\n" ;
-    out<<"Last login : "<<__DATE__<<" "<<__TIME__<<"\n";
-
-    out.close();
-
-    SetConsoleTextAttribute(h,2);
-    gotoxy(64,20);
-    cout<<"********  Welcome To Contact - Directory  ********";
-    exit(1);
-
-}
-
-void userlogin(){
-
-    int choice;
-    SetConsoleTextAttribute(h,6);
-    gotoxy(30,12);
-    cout<<"1.Login";
-    gotoxy(30,14);
-    cout<<"2.Create Account     ";
-    SetConsoleTextAttribute(h,15);
-    cin>>choice;
-
-    switch (choice)
-    {
-    case 1:
-    {
-                int c = 3 ;
-                while (c != 0)
-                {
-                        int a = login();
-                        if (a == 0)
-                        {
-                            c -- ;
-                            SetConsoleTextAttribute(h,3);
-                            gotoxy(30,17);
-                            cout<<"Enter the correct data !!!";
-                            gotoxy(30,19);
-                            cout<<"Only "<<c<<" chances left !!! ";
-                            SetConsoleTextAttribute(h,15);
-                            getch();
-                        }
-                        else
-                        {
-                            return ;
-                        }
+//     switch (choice)
+//     {
+//     case 1:
+//     {
+//                 int c = 3 ;
+//                 while (c != 0)
+//                 {
+//                         int a = login();
+//                         if (a == 0)
+//                         {
+//                             c -- ;
+//                             SetConsoleTextAttribute(h,3);
+//                             gotoxy(30,17);
+//                             cout<<"Enter the correct data !!!";
+//                             gotoxy(30,19);
+//                             cout<<"Only "<<c<<" chances left !!! ";
+//                             SetConsoleTextAttribute(h,15);
+//                             getch();
+//                         }
+//                         else
+//                         {
+//                             return ;
+//                         }
                         
-                }
-                    SetConsoleTextAttribute(h,14);
-                    gotoxy(30,21);
-                    cout<<"Try Again Later!!!"<<endl;
-                    exit(1);
+//                 }
+//                     SetConsoleTextAttribute(h,14);
+//                     gotoxy(30,21);
+//                     cout<<"Try Again Later!!!"<<endl;
+//                     exit(1);
                 
-                break;
-    }
-    case 2:
-        newaccount();
-        break;
+//                 break;
+//     }
+//     case 2:
+//         newaccount();
+//         break;
     
-    default:
-        break;
-    }
+//     default:
+//         break;
+//     }
 
-}
+// }
 
 
 
@@ -1255,31 +1149,23 @@ void user(){
 
     
 }
-void gotoxy(short int x,short int y) // To Move The Cursor To The Desired Place
-{
-HANDLE Screen;
-Screen = GetStdHandle(STD_OUTPUT_HANDLE);
-COORD Position={x, y};
-SetConsoleCursorPosition(Screen, Position);
-}
-
-void load() //For Loading Screen
-{
-    int row,col,r,c,q;
-    gotoxy(83,17);
-    SetConsoleTextAttribute(h,3);
-    printf("Loading...");
-    gotoxy(77,18);
-    SetConsoleTextAttribute(h,9);
-    for(r=1; r<=20; r++)
-    {
-        for(q=0; q<=100000000; q++); //To Print The Character Slowly
-        printf("%c",177);
-    }
-    printf("\n");
-    gotoxy(57,20);
-    SetConsoleTextAttribute(h,14);
-    printf("Loading Completed SuccessFully. Press Any Key To Continue");
-    getch();
-    system("cls");
-}
+// void load() //For Loading Screen
+// {
+//     int row,col,r,c,q;
+//     gotoxy(83,17);
+//     SetConsoleTextAttribute(h,3);
+//     printf("Loading...");
+//     gotoxy(77,18);
+//     SetConsoleTextAttribute(h,9);
+//     for(r=1; r<=20; r++)
+//     {
+//         for(q=0; q<=100000000; q++); //To Print The Character Slowly
+//         printf("%c",177);
+//     }
+//     printf("\n");
+//     gotoxy(57,20);
+//     SetConsoleTextAttribute(h,14);
+//     printf("Loading Completed SuccessFully. Press Any Key To Continue");
+//     getch();
+//     system("cls");
+// }

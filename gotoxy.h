@@ -1,6 +1,14 @@
-#ifndef GOTOXY_H
-#define GOTOXY_H
+#include<iostream>
+#include<windows.h>
 
-void gotoxy(short int a,short int b);
+using namespace std; 
 
-#endif
+
+
+void gotoxy(short int x,short int y) // To Move The Cursor To The Desired Place
+{
+HANDLE Screen;
+Screen = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD Position={x, y};
+SetConsoleCursorPosition(Screen, Position);
+}
