@@ -634,7 +634,7 @@ void user(){
     getline(cin,city);
 
     ifstream in;
-    string file = city.append(".txt");
+    string file ="\\City\\" + city.append(".txt");
     in.open(file);
 
     if (!in)

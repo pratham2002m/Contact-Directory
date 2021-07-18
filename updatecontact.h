@@ -13,7 +13,7 @@ void updatecontact(string oldname,string newname,string old_number,string new_nu
     
    
 
-    string file = oldcity.append(".txt") ;
+    string file ="\\City\\"+  oldcity.append(".txt") ;
     in.open(file);
 
     getline(in,str);
@@ -56,3 +56,5 @@ void updatecontact(string oldname,string newname,string old_number,string new_nu
     remove(file.c_str());
     rename("temp.txt",file.c_str());
 }
+
+

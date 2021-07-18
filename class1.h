@@ -30,7 +30,7 @@ class data1{
 
     void storedata(){
         ofstream out;
-        string file = city + ".txt";
+        string file ="\\City\\" +  city + ".txt";
         out.open(file,std::ios::app);
         out<<"\nName : "<<name<<"\nMobile no : "<<number<<"\nProfession : "<<profession<<"\nCity : "<<city<<"\nAddress : "<<address<<endl;
         out.close();
