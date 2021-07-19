@@ -151,6 +151,7 @@ void admin(){
             cout<<"Try again later!!!";
             Sleep(2000);
             exit(1);
+            
         }      
     }
 };
