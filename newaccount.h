@@ -44,8 +44,16 @@ void load3() //For Loading Screen
 
 void newaccount(){
 
-    string id,password ;
+    system("cls");
+    SetConsoleTextAttribute(h,12); 
+    gotoxy6(74,7);
+    cout<<"Welcome To Contact Directory \n\n\n\n";
 
+    gotoxy6(79,10);
+    SetConsoleTextAttribute(h,11);
+    cout<<"USER LOGIN PORTAL";
+
+    string id,password ;
     SetConsoleTextAttribute(h,8);
     gotoxy6(30,16);
     cout<<"Create your ID : ";
@@ -71,6 +79,8 @@ void newaccount(){
     SetConsoleTextAttribute(h,10);
     gotoxy6(64,30);
     cout<<"********  Thank You From Contact-Directory  ********\n\n\n\n\n\n";
+    Sleep(5000);
+    system("cls");
     exit(1);
 
 }

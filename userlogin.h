@@ -79,6 +79,7 @@ void userlogin(){
             break;
         case 3:
             changepassword();
+            userlogin();
             break;
         
         default:

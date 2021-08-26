@@ -13,7 +13,7 @@ void updatecontact(string oldname,string newname,string old_number,string new_nu
     
    
 
-    string file ="\\City\\"+  oldcity.append(".txt") ;
+    string file =  oldcity.append(".txt") ;
     in.open(file);
 
     getline(in,str);

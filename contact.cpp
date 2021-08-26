@@ -635,7 +635,7 @@ void user(){
     getline(cin,city);
 
     ifstream in;
-    string file ="\\City\\" + city.append(".txt");
+    string file = city.append(".txt");
     in.open(file);
 
     if (!in)
@@ -810,6 +810,7 @@ void user(){
         
         while (!in.eof())
         {
+            
             if (str.substr(0,4) == "Name")
             {
                 sname = str ;
@@ -821,8 +822,9 @@ void user(){
             }
             
             
-            if (str == "Profession : " + profession)
+            if (str == ("Profession : " + profession))
             {
+                
                 flag = 1 ;
                 gotoxy(30,14);
                 cout<<sname<<endl;

@@ -15,7 +15,7 @@ void removecontact(string name,string city,string number){
 
     string tempfile = "temp.txt";
     ofstream out(tempfile) ;
-    string file = "\\City\\" + city.append(".txt") ;
+    string file = city.append(".txt") ;
     in.open(file);
     getline(in,str);
     while (!in.eof())

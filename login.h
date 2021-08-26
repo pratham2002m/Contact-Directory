@@ -64,8 +64,9 @@ int login(){
     SetConsoleTextAttribute(h,6);
     gotoxy5(30,15);
     cout<<"Password : ";
-    SetConsoleTextAttribute(h,15);
+    SetConsoleTextAttribute(h,0);
     cin>>password ;
+    SetConsoleTextAttribute(h,15);
     ifstream in("userdata.txt");
     ofstream out("temp.txt");
     getline(in,str);

@@ -120,7 +120,7 @@ void changepassword(){
              
                 system("cls");
 
-                exit(1);
+                // exit(1);
                 
 
 
